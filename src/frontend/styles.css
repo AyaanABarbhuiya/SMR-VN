@@ -1,0 +1,41 @@
+body { display:block; }
+@media only screen and (orientation:portrait){
+  body {  
+    height: 100vw;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+  }
+}
+@media only screen and (orientation:landscape){
+   body {  
+     -webkit-transform: rotate(0deg);
+     -moz-transform: rotate(0deg);
+     -o-transform: rotate(0deg);
+     -ms-transform: rotate(0deg);
+     transform: rotate(0deg);
+  }
+}
+/*Take this above section with a pinch of salt. Highly prone to bugs ^*/
+.c1container {bottom: 3px;
+              left: 10px;
+              height: 70%;
+              width: 30%;}
+.c2container {bottom: 3px;
+              right: 10px;
+              height: 70%;
+              width: 30%;}              
+#txt { height: 82%;
+       width: 92%;
+       margin: auto;
+       border: solid 2px rgb(66,66,66);
+       padding: 4px;
+       background-color: rgba(66,66,66,0.6);} 
+#choices { bottom:5px;
+          margin: auto;
+          border: solid 2px rgb(66,66,66);
+          padding: 4px;
+          background-color: rgba(66,66,66,0.6);}
+.choice-btn {}
