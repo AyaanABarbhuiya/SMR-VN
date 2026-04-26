@@ -1,3 +1,4 @@
+
 /* 1. The initiation section using variables and login data*/
 /* 2. The character sectionfor changing sprites and backgrounds */ 
 let scene;
@@ -8,27 +9,40 @@ async function initGame() {
     const savedScene = localStorage.getItem('current'); // TOBE: REPLACED BY PG
     if (savedScene && sceneData[savedScene]){
       scene = sceneData[savedScene];}
-      else { scene = sceneData["start"];}
+    else { scene = sceneData["start"];}
    
 } 
 async function render() {
-    await initGame(); 
-    document.getElementById("txt").innerHTML = scene.txt;
-    document.body.style.backgroundImage = `url(${scene.bg})`;
-    document.getElementById("c1").src = scene.c1; 
-    document.getElementById("c2").src = scene.c2;
-     // Typewriter Engine
-    var i = 0; 
-    var speed = 100; 
-    function typeWriter (){
-    if (i < scene.txt.length) {
-    document.getElementById("txt").innerHTML += scene.txt.charAt(i);
-    i++;
-    setInterval (typeWriter,speed); 
-     }
-  } 
-  typeWriter ();
-}
+  const txt = document.getElementById("txt");
+  txt.innerHTML = ""; 
+
+  if (scene.bg) {
+    document.body.style.backgroundImage =`url(${scene.bg})`; 
+  } //Ekta starting image lgao, backticks is sus
+   var blocks = scene.txt.split(/(\[.*?\])/g) ;
+
+   for (block of blocks) {
+  if (block.startWith('[') && block.endsWith(']')) {
+  //Command, execute khro
+  var instruction = block.slice(1, -1).split(':'); 
+  var cmd = instruction[0];
+  var val = instruction[1];
+
+  if (cmd === 'bg'){
+    document.body.style.backgroundImage = `url(${val})`;
+  }
+ 
+  else { //typewriter zindabad!
+    for (var i = 0; i < block.length; i++) {
+      txt.innerHTML += block.charAt(i) 
+      await new Promise( resolve => setTimeout(resolve,50));
+
+     } /* Will Cry if ts fails*/ }
+
+     } //brackets kinda murky here
+  }
+ }
+
 
 async function renderChoices() {
     await render(); 
@@ -58,3 +72,38 @@ async function update(next) {
 
 
  /*TODO: Temporarily save in localStorage and later to PostgreSQL using pg in Node.js */ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
